@@ -1,0 +1,30 @@
+namespace: AdminLTE
+
+adminlte-frontend:
+  defines: runnable
+  metadata:
+    name: adminlte-frontend
+    description: >-
+      A responsive administration template built with Bootstrap 5 and JavaScript
+      plugins, compiled with Astro.
+    icon: https://emojiapi.dev/api/v1/robot.svg
+  containers:
+    adminlte-frontend:
+      image: env-3261.registry.local/adminlte-frontend:master-44eee16
+      build: .
+      dockerfile: Dockerfile.adminlte-frontend
+  services:
+    http:
+      description: HTTP traffic
+      container: adminlte-frontend
+      port: 80
+      host-port: 80
+      publish: true
+      protocol: tcp
+  connections: {}
+  variables: {}
+
+stack:
+  defines: group
+  members:
+    - AdminLTE/adminlte-frontend
