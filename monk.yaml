@@ -1,0 +1,30 @@
+namespace: AdminLTE
+
+admin-lte:
+  defines: runnable
+  metadata:
+    name: admin-lte
+    description: >-
+      A responsive open source admin dashboard and control panel template based
+      on Bootstrap 5.
+    icon: https://emojiapi.dev/api/v1/robot.svg
+  containers:
+    admin-lte:
+      image: env-4267.registry.local/admin-lte:master-44eee16
+      build: .
+      dockerfile: Dockerfile.admin-lte
+  services:
+    http:
+      description: Port for serving the admin dashboard
+      container: admin-lte
+      port: 80
+      host-port: 80
+      publish: true
+      protocol: tcp
+  connections: {}
+  variables: {}
+
+stack:
+  defines: group
+  members:
+    - AdminLTE/admin-lte
